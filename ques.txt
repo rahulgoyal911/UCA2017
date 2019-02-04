@@ -1,0 +1,20 @@
+//sort 4 numbers using only 5 if statements
+print fibonacci using complexity n/2
+//factorial using recursion(normal,if else)
+sum of first ans last digit
+sum of second and second last digit
+calculate sum of digits using recursion
+//calculate reverse of a number using recursion and making a value returning function(from both sides)
+prime factors using recursion
+//calculate power using recursion
+//second max in array(with minimun colplexity)
+//input array{1,9,1,2,4,6} -> output array{7,16,3,3,13,7} using complexity n(we dont even know the size
+ of array.. the array will end where -1 occurs)
+//Pattern using recursion(using 3 loops)
+ //A B C D E F E D C B A
+ //A B C D E _ E D C B A
+ //A B C D _ _ _ D C B A
+ //A B C _ _ _ _ _ C B A
+ //A B _ _ _ _ _ _ _ B A
+ //A _ _ _ _ _ _ _ _ _ A
+
