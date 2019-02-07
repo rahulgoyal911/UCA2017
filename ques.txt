@@ -1,7 +1,7 @@
 //sort 4 numbers using only 5 if statements
 print fibonacci using complexity n/2
 //factorial using recursion(normal,if else)
-sum of first ans last digit
+sum of first and last digit
 sum of second and second last digit
 calculate sum of digits using recursion
 //calculate reverse of a number using recursion and making a value returning function(from both sides)
@@ -17,4 +17,6 @@ prime factors using recursion
  //A B C _ _ _ _ _ C B A
  //A B _ _ _ _ _ _ _ B A
  //A _ _ _ _ _ _ _ _ _ A
-
+//initial zeries are zero and manipulaes zeroes are not zeres(removing noise from audio files)
+//flood fill algorithm(robot ques)
+in trees print branch whose sum is equal to given number
