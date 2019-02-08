@@ -1,4 +1,4 @@
-//we dont have te array size
+//we dont have the array size
 //the array ends when -1 occurs
 //complexity must be n/2
 //we have to add reverse of array to array

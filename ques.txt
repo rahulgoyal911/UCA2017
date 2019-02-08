@@ -20,3 +20,9 @@ prime factors using recursion
 //initial zeries are zero and manipulaes zeroes are not zeres(removing noise from audio files)
 //flood fill algorithm(robot ques)
 in trees print branch whose sum is equal to given number
+
+String
+reverse string using recursion
+count number of words in string
+print starting and ending index of every word in a string
+input-> __my____name_is__rahul_____ , output-> My_name_is_rahul
