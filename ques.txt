@@ -22,7 +22,15 @@ prime factors using recursion
 in trees print branch whose sum is equal to given number
 
 String
-reverse string using recursion
-count number of words in string
-print starting and ending index of every word in a string
-input-> __my____name_is__rahul_____ , output-> My_name_is_rahul
+//reverse string using recursion
+//count number of words in string
+//print starting and ending index of every word in a string(startEnd.cpp)
+//input-> __my____name_is__rahul_____ , output-> My_name_is_rahul
+//reverse each word in a string
+//remove spaces in starting and ending
+//count of string and insert 0x20 betweek every 2 words(0x20.cpp)
+compressing and decompressing string
+//find number of characters in a string
+substring
+//input-> Sachin ramesh tendulkar , output-> S.R tendulkar(shortname.cpp)
+we have a string ans a word, we want to find if the word exists in string or not.
