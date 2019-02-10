@@ -20,11 +20,25 @@ void compress(char str[]){
     }
     str[k++]=ch;
     str[k++]=count+'0';
-
     str[k]='\0'; 
 }
 void decompress(char str[]){
-    
+    int l=0;
+    int i;
+    for(i=0;str[i]!='\0';i=i+2){
+        l+=str[i+1]-'0';
+    }
+    str[l]='\0';
+    int k=l-1;
+    i-=1;
+    int a;
+    while(i>=01){
+        a=str[i]-'0';
+        for(int z=0;z<a;z++){
+            str[k--]=str[i-1];
+        }
+        i-=2;
+    }
 }
 int main()
 {
