@@ -6,6 +6,8 @@ using namespace std;
 char board[80][80];
 vector<struct snake> s{4};
 int length=4;
+int lastx,lasty;
+int score=0;
 void eatFood();
 struct food{
     int x;
@@ -35,6 +37,9 @@ void print()
 {
     for(int i=0;i<80;i++){
      for(int j=0;j<80;j++){
+         if(i==0 || j==0 ||i==79 ||j==79){
+                    board[i][j]='I';
+                }
          if(board[i][j]!=0)
          cout<<board[i][j];
          else
@@ -72,6 +77,9 @@ void moveup(){
     int tempx=s[0].x;
     int tempy=s[0].y;
     int tempval = s[0].value;
+    if(s[0].x==0){
+        s[0].x+=79;
+    }
     s[0].x-=1;
     s[0].y-=0;
     for(int i=length-1;i>1;i--){
@@ -87,6 +95,21 @@ void moveup(){
         board[lasttempx][lasttempy]=' ';
         if( s[0].x == f.x && s[0].y == f.y ){
             eatFood();
+        }
+        lastx=s[length].x;
+        lasty=s[length].y;
+
+        if(s[0].x>79){
+            s[0].x-=79;
+        }
+        if(s[0].y>79){
+            s[0].y-=79;
+        }
+        if(s[0].x<0){
+            s[0].x+=79;
+        }
+        if(s[0].y<0){
+            s[0].y+=79;
         }
     system("clear");
     print();
@@ -113,6 +136,20 @@ void movedown(){
         if( s[0].x == f.x && s[0].y == f.y ){
             eatFood();
         }
+        lastx=s[length].x;
+        lasty=s[length].y;
+        if(s[0].x>79){
+            s[0].x-=79;
+        }
+        if(s[0].y>79){
+            s[0].y-=79;
+        }
+        if(s[0].x<0){
+            s[0].x+=79;
+        }
+        if(s[0].y<0){
+            s[0].y+=79;
+        }
     system("clear");
     print();
 
@@ -123,6 +160,9 @@ void moveleft(){
     int tempx=s[0].x;
     int tempy=s[0].y;
     int tempval = s[0].value;
+    if(s[0].y==0){
+        s[0].y+=79;
+    }
     s[0].x-=0;
     s[0].y-=1;
     for(int i=length-1;i>1;i--){
@@ -138,6 +178,20 @@ void moveleft(){
         board[lasttempx][lasttempy]=' ';
         if( s[0].x == f.x && s[0].y == f.y ){
             eatFood();
+        }
+        lastx=s[length].x;
+        lasty=s[length].y;
+        if(s[0].x>79){
+            s[0].x-=79;
+        }
+        if(s[0].y>79){
+            s[0].y-=79;
+        }
+        if(s[0].x<0){
+            s[0].x+=79;
+        }
+        if(s[0].y<0){
+            s[0].y+=79;
         }
     system("clear");
     print();
@@ -166,6 +220,20 @@ void moveright(){
         if( s[0].x == f.x && s[0].y == f.y ){
             eatFood();
         }
+        lastx=s[length].x;
+        lasty=s[length].y;
+        if(s[0].x>79){
+            s[0].x-=79;
+        }
+        if(s[0].y>79){
+            s[0].y-=79;
+        }
+        if(s[0].x<0){
+            s[0].x+=79;
+        }
+        if(s[0].y<0){
+            s[0].y+=79;
+        }
     system("clear");
     print();
 
@@ -178,27 +246,22 @@ void generateFood()
 }
 void eatFood()
 {
-    board[f.x][f.y]='H';
-
+    score+=10;
     f.x= rand() % 50+20; 
     f.y= rand() % 50+20;
 
     struct snake ob;
 
-    ob.x=s[length].x+s[length].x-s[length-1].x;
-    ob.y=s[length].y+s[length].y-s[length-1].y;
+    ob.x=lastx;
+    ob.y=lasty;
     ob.value='T';
 
     s.push_back(ob);
 
     length++;
-     s[length-1].value='#';
-    //  s[length].x=s[length-1].x+s[length-1].x-s[length-2].x;
-    //  s[length+1].y=s[length-1].y+s[length-1].y-s[length-2].y;
-
-    board[s[length-1].x][s[length-1].y]=s[length-1].value;
-    board[s[length].x][s[length].y]=s[length].value;
-    
+    s[length-2].value='#';
+     board[s[length-2].x][s[length-2].y]='#';
+     print();
     generateFood();
 }
 int main()
@@ -224,6 +287,11 @@ while(gameon){
     }
     else if(input=='d'){
         moveright();
+    }
+    else if(input=='q'){
+        //quit;
+        cout<<"Your final score is "<<score<<endl;
+        break;
     }
     else{
         //wrong input
