@@ -328,6 +328,20 @@ void checkdeath(){
     death=true;
 
 }
+char getinput()
+{
+    char ans;
+    ifstream iis;
+    ofstream ios;
+    iis.open("kbfile.txt");
+    ios.open("kbfile.txt");
+    
+    iis>>ans;
+    ios<<'q';
+    iis.close();
+    ios.close();
+    return ans;
+}
 int main()
 {
     cout<<"press n to continue previous game and press m for new game \n";
@@ -342,7 +356,7 @@ print();
 generateFood();
 int gameon=1;
 while(gameon){
-    cin>>input;
+   cin>>input;
     if(input=='w'){
         moveup();
         checkdeath();
