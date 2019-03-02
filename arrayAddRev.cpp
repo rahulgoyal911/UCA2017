@@ -38,7 +38,12 @@ void f(int a[],int i,int j)
 // 	else if(a[j+1]==-1)
 // 	{
 // 		c=i+1;
-// 		return;
+// 		return; 
+quickSortInbuilt.cpp: In function ‘int main()’:
+quickSortInbuilt.cpp:19:33: error: invalid conversion from ‘int (*)(void*, void*)’ to ‘__compar_fn_t {aka int (*)(const void*, const void*)}’ [-fpermissive]
+     qsort(a,11,sizeof(int),compa);
+                                 ^
+In file included from /usr/include/c++/7/cstdlib:75:0,
 // 	}
 // 	else
 // 	{

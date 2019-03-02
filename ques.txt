@@ -33,3 +33,22 @@ String
 //find number of characters in a string
 //input-> Sachin ramesh tendulkar , output-> S.R tendulkar(shortname.cpp)
 //we have a string ans a word, we want to find if the word exists in string or not.
+
+
+sorting
+bubble
+selection
+insertion
+merge
+quick
+
+
+search
+binary
+
+
+storage classes
+//auto
+//register
+//extern
+//static
