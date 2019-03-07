@@ -1994,10 +1994,10 @@ marqueeInit({
       jQuery("#owl-demo").owlCarousel({
      
           nav: false,
-                dots: false,
+                dots: true,
                 autoplay:true, 
 		  loop: true,
-		rewind: true,
+		 rewind: true,
           slideSpeed : 300,
           paginationSpeed : 400,
      
@@ -2442,9 +2442,9 @@ s.parentNode.insertBefore(b, s);})();
 <!--
 Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
 
-Object Caching 418/461 objects using disk
+Object Caching 358/533 objects using disk
 Page Caching using disk: enhanced 
 Minified using disk
 
-Served from: www.chitkara.edu.in @ 2019-03-07 09:28:59 by W3 Total Cache
+Served from: www.chitkara.edu.in @ 2019-03-07 09:56:27 by W3 Total Cache
 -->

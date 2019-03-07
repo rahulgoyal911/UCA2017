@@ -237,35 +237,37 @@ int main(int argc,char* argv[])
 {
     Check_Arguments(argc,argv);
     get_Page(argv[1],argv);
-    //printf("FETCHED");
-    struct stat st; //variable which will count length of file.
-stat("temp.txt",&st); // temp.txt is the file where wget fetch the html
+    struct stat st;
+stat("temp.txt",&st);
 int file_size=st.st_size;
 file_size++;
     char *data;
-    data = (char *)malloc(file_size*sizeof(char));//[157940];//="";
+    data = (char *)malloc(file_size*sizeof(char));
     FILE *fp;
     int i=0;
     char ch;
     fp = fopen("temp.txt", "r+");
     ch = getc(fp);
-   while (ch!=EOF)
-   {
+    while (ch!=EOF)
+    {
        data[i++] +=ch;
        ch = getc(fp);
        
     }
-    
-    // printf("%s",data);
+    char *links[100];
+    int j=0;
      fclose(fp);
-     char *result;//[]="";
-     result = (char *)malloc(file_size*sizeof(char));//[157940];//="";
+     char *result;
+     result = (char *)malloc(file_size*sizeof(char));
      int ans = GetNextURL(data,argv[1],result, 0); 
-        for(int i=0;i<20;i++)
-        {
-            printf("\n%s",result);
-         ans = GetNextURL(data,argv[1],result, ans);
-        }
+    while(j<100){
+        links[j] = (char *)malloc(200*sizeof(char));
+            strcpy(links[j++],result);
+             ans = GetNextURL(data,argv[1],result, ans);
+    }
+    for(int j=0;j<100;j++){
+        printf("\n%s",links[j]);
+    }
  
     return 0;
 }
