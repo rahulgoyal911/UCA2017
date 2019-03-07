@@ -17,7 +17,7 @@ void reverse(node *current)
             // Store next 
             next = current->next; 
   
-            // Reverse current node's p, *next = NULLointer 
+            // Reverse current node's p, *next = NULLpointer 
             current->next = prev; 
   
             // Move pointers one position ahead. 

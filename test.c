@@ -1,32 +1,39 @@
-#include <stdio.h>
-/* Include other headers as needed */
-int main()
-{
-  int t;
-  scanf("%d",&t);
-  for(int i=0;i<t;i++){
-    int n;
-    scanf("%d",&n);
-    int a[n];
-    for(int j=0;j<n;j++){
-      scanf("%d",&a[j]);
-    }
-    int r;
-    scanf("%d",&r);
-    int temp;
-    
-    for(int k=0;k<r;i++){
-      temp=a[n];
-      for(int l=n;l>0;l++){
-        a[l]=a[l-1];
-      }
-      a[0]=temp;
-    }
-    for(int j=0;j<n;j++){
-      printf("%d",a[j]);
-    }
-  }
+/*
+ * Complete the function below.
+ * Please store the size of the int array to be returned in result_size pointer. For example,
+ * int a[3] = {1, 2, 3};
+ * *result_size = 3;
+ * return a;
+ * 
+ */
 
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
-    return 0;
+int* cutSticks(int n, int *a, int *result_size) 
+{
+  int k=0;
+  int *b;
+  int num=n;
+  b=(int *)malloc(n*sizeof(int));
+  while(num!=0)
+  {
+      int min=a[0];
+      for(int i=1;i<n;i++){
+        if(a[i]<min)
+          min=a[i];
+      }
+      int count=0;
+      for(int i=0;i<n;i++){
+              if(a[i]>0){
+                a[i]-=min;
+                count++;
+                if(a[i]==0)
+                  num--;
+              }
+      }
+      b[k++]=count;
+  }
+  *result_size=--k;
+  return b;
 }
+
+
+
