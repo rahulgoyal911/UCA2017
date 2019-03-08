@@ -131,6 +131,7 @@ qp('track', 'ViewContent');
 
 
 
+
 <script>
 globalSearchClick='0';
 function getCheck() {
@@ -406,6 +407,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<li id="menu-item-17124" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-17124"><a href="https://www.chitkara.edu.in/arts/">ART &#038; DESIGN</a>
 	<ul class="sub-menu">
 		<li id="menu-item-25360" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25360"><a href="https://www.chitkara.edu.in/arts/bachelor-fine-arts-bfa/">Bachelor of Fine Arts</a></li>
+		<li id="menu-item-25358" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25358"><a href="https://www.chitkara.edu.in/masscomm/3-year-ba-photography-visual-arts/">B.A. Photography &#038; Visual Arts</a></li>
 		<li id="menu-item-25361" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25361"><a href="https://www.chitkara.edu.in/arts/b-sc-animation/">B.Sc / B. Des Animation</a></li>
 		<li id="menu-item-23426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23426"><a href="https://www.chitkara.edu.in/arts/b-des-game-design/">B. Des Game Design</a></li>
 		<li id="menu-item-25363" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25363"><a href="https://www.chitkara.edu.in/arts/b-des-visual-communication/">B. Des  Visual Communication</a></li>
@@ -434,7 +436,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<li id="menu-item-187" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-187"><a href="https://www.chitkara.edu.in/chitkara-school-of-mass-communication/">JOURNALISM &#038; MASS COMM.</a>
 	<ul class="sub-menu">
 		<li id="menu-item-1576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1576"><a href="https://www.chitkara.edu.in/bjmc">B.A. Journalism</a></li>
-		<li id="menu-item-25358" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25358"><a href="https://www.chitkara.edu.in/masscomm/3-year-ba-photography-visual-arts/">B.A. Photography &#038; Visual Arts</a></li>
 	</ul>
 </li>
 	<li id="menu-item-25419" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-25419"><a href="#">Basic &#038; Applied Sciences</a>
@@ -700,6 +701,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-17124"><a href="https://www.chitkara.edu.in/arts/">ART &#038; DESIGN</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25360"><a href="https://www.chitkara.edu.in/arts/bachelor-fine-arts-bfa/">Bachelor of Fine Arts</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25358"><a href="https://www.chitkara.edu.in/masscomm/3-year-ba-photography-visual-arts/">B.A. Photography &#038; Visual Arts</a></li>
 		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25361"><a href="https://www.chitkara.edu.in/arts/b-sc-animation/">B.Sc / B. Des Animation</a></li>
 		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23426"><a href="https://www.chitkara.edu.in/arts/b-des-game-design/">B. Des Game Design</a></li>
 		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25363"><a href="https://www.chitkara.edu.in/arts/b-des-visual-communication/">B. Des  Visual Communication</a></li>
@@ -728,7 +730,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-187"><a href="https://www.chitkara.edu.in/chitkara-school-of-mass-communication/">JOURNALISM &#038; MASS COMM.</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1576"><a href="https://www.chitkara.edu.in/bjmc">B.A. Journalism</a></li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25358"><a href="https://www.chitkara.edu.in/masscomm/3-year-ba-photography-visual-arts/">B.A. Photography &#038; Visual Arts</a></li>
 	</ul>
 </li>
 	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-25419"><a href="#">Basic &#038; Applied Sciences</a>
@@ -1045,17 +1046,17 @@ Students from around the country are getting attracted to Chitkara University be
 				<div class="newspanel bgf7">
 					<div class="cutimes">
 						<a href="https://www.chitkara.edu.in/cu-times/"><img src="https://www.chitkara.edu.in/wp-content/themes/chitkara/images/cu-times-logo.png" alt="cu-times-logo" title="cu-times-logo" width="140" height="41" /></a>
-					<span>7-03-2019</span>
+					<span>8-03-2019</span>
 					</div>
 					<ul class="newslist">
 						                                <li>
+	                                	<a href="https://www.chitkara.edu.in/news/chitkara-university-toastmasters-club-wins-beat-the-clock-team-enthusiastic-award/">Chitkara University Toastmaster&#8217;s Club wins &#8216;Beat the Clock&#8217;, &#8216;Team Enthusiastic&#8217; Award</a>
+	                                </li>
+                                	                                <li>
 	                                	<a href="https://www.chitkara.edu.in/news/woman-of-substance-dr-madhu-chitkara-honoured-for-breaking-the-glass-ceiling/">&#8216;Woman of Substance&#8217; Dr. Madhu Chitkara honoured for breaking the glass ceiling</a>
 	                                </li>
                                 	                                <li>
 	                                	<a href="https://www.chitkara.edu.in/news/smart-india-hackathon-2019-pm-narendra-modi-interacts-live-with-students-at-chitkara-university/">Smart India Hackathon 2019: PM Narendra Modi interacts live with students at Chitkara University</a>
-	                                </li>
-                                	                                <li>
-	                                	<a href="https://www.chitkara.edu.in/news/international-mother-language-day-celebrated-in-different-flavors-at-chitkara-university/">International Mother Language Day Celebrated in Different Flavors at Chitkara University</a>
 	                                </li>
                                 					</ul>	
 					<div class="in-the-press-btn-news">	
@@ -2442,9 +2443,9 @@ s.parentNode.insertBefore(b, s);})();
 <!--
 Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
 
-Object Caching 358/533 objects using disk
+Object Caching 357/530 objects using disk
 Page Caching using disk: enhanced 
 Minified using disk
 
-Served from: www.chitkara.edu.in @ 2019-03-07 09:56:27 by W3 Total Cache
+Served from: www.chitkara.edu.in @ 2019-03-08 05:58:10 by W3 Total Cache
 -->

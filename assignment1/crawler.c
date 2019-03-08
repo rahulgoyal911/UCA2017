@@ -3,34 +3,15 @@
 #include<string.h>
 #include<sys/types.h>
 #include<sys/stat.h>
-
-
 #define urlLength 1000
 #define Base_Url "www.chitkara.edu.in"
 
-char urlofthispage[]="";
 int Check_Argument(int check)  // function to check wheater user has entered total 3 arguments or not!!
 {
     if(check==4)
         return 1;
         printf("ARGUMENTS ARE NOT PROPER");
         exit(0);
-}
-void removeWhiteSpace(char* html) 
-{
-  int i;
-  char *buffer = malloc(strlen(html)+1), *p=malloc (sizeof(char)+1);
-  memset(buffer,0,strlen(html)+1);
-  for (i=0;html[i];i++) 
-  {
-    if(html[i]>32)
-    {
-      sprintf(p,"%c",html[i]);
-      strcat(buffer,p);
-    }
-  }
-  strcpy(html,buffer);
-  free(buffer); free(p);
 }
 
 int Check_Depth(char* argv[])  // function to check wheater depth entered in postive or negative!!
@@ -62,7 +43,7 @@ int Check_Url(char* argv[])  // function to check wheater url is correct or not!
             exit(0);
         }
         else
-            return 1;   
+            return 1;
     }
 }
 
@@ -72,11 +53,11 @@ int Check_Dir(char* argv[])
     if( stat(argv[3],&statbuf) == -1)
     {
         char str[100]="mkdir ";
-        strcat(str,argv[3]);
         printf("%s",argv[3]);
+        strcat(str,argv[3]);
         system(str);
         return 1;
-    
+
     }
     if( !S_ISDIR(statbuf.st_mode))
     {
@@ -91,37 +72,25 @@ int Check_Dir(char* argv[])
     return 1;
 }
 
-void get_Page(char *url,char *argv[])  // function to fetch url from user and contact in urlBuffer and fetch page source code and add it to temp file
+
+void removeWhiteSpace(char* html)
 {
-    char urlBuffer[urlLength + 300] = {0};
-    strcat(urlBuffer, "wget -O ");
-    strcat(urlBuffer, "./temp.txt ");
-    strcat(urlBuffer, url); 
-    printf("\n\n%s\n\n",urlBuffer);
-    system(urlBuffer);
-    //system("clear");
-    printf("Page fetched successfully");
+  int i;
+  char *buffer = malloc(strlen(html)+1), *p=malloc (sizeof(char)+1);
+  memset(buffer,0,strlen(html)+1);
+  for (i=0;html[i];i++)
+  {
+    if(html[i]>32)
+    {
+      sprintf(p,"%c",html[i]);
+      strcat(buffer,p);
+    }
+  }
+  strcpy(html,buffer);
+  free(buffer); free(p);
 }
 
-void Check_Arguments(int argc,char* argv[])  // function to check whether all arguments are correct or not!!
-{
-    	if(Check_Argument(argc))
-        {
-            if(Check_Depth(argv))
-            {
-                if(Check_Url(argv))
-                {
-                   // system("clear");
-                    printf("URL is corrent");
-                    if(Check_Dir(argv))
-                    {
-                        printf("All Arguments are correct\n");
-                    }
-                }
-            }
-        }
-}
-int GetNextURL(char* html, char* urlofthispage, char* result, int pos) 
+int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
 {
   char c;
   int len, i, j;
@@ -136,22 +105,25 @@ int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
   // /NEW
 
   // Find the <a> <A> HTML tag.
-  while (0 != (c = html[pos])) 
+  while (0 != (c = html[pos]))
   {
     if ((c=='<') &&
         ((html[pos+1] == 'a') || (html[pos+1] == 'A'))) {
       break;
     }
     pos++;
+    //printf("%c\n", html[pos]);
   }
   //! Find the URL it the HTML tag. They usually look like <a href="www.abc.com">
   //! We try to find the quote mark in order to find the URL inside the quote mark.
-  if (c) 
-  {  
+  if (c)
+  {
     // check for equals first... some HTML tags don't have quotes...or use single quotes instead
+    //printf("%c\n", html[pos]);
+
     p1 = strchr(&(html[pos+1]), '=');
-    
-    if ((!p1) || (*(p1-1) == 'e') || ((p1 - html - pos) > 10)) 
+
+    if ((!p1) || (*(p1-1) == 'e') || ((p1 - html - pos) > 10))
     {
       // keep going...
       return GetNextURL(html,urlofthispage,result,pos+1);
@@ -159,22 +131,22 @@ int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
     if (*(p1+1) == '\"' || *(p1+1) == '\'')
       p1++;
 
-    p1++;    
+    p1++;;
 
     p2 = strpbrk(p1, "\'\">");
-    if (!p2) 
+    if (!p2)
     {
       // keep going...
       return GetNextURL(html,urlofthispage,result,pos+1);
     }
-    if (*p1 == '#') 
+    if (*p1 == '#')
     { // Why bother returning anything here....recursively keep going...
 
       return GetNextURL(html,urlofthispage,result,pos+1);
     }
     if (!strncmp(p1, "mailto:",7))
       return GetNextURL(html, urlofthispage, result, pos+1);
-    if (!strncmp(p1, "http", 4) || !strncmp(p1, "HTTP", 4)) 
+    if (!strncmp(p1, "http", 4) || !strncmp(p1, "HTTP", 4))
     {
       //! Nice! The URL we found is in absolute path.
       strncpy(result, p1, (p2-p1));
@@ -182,10 +154,10 @@ int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
     } else {
       //! We find a URL. HTML is a terrible standard. So there are many ways to present a URL.
       if (p1[0] == '.') {
-        //! Some URLs are like <a href="../../../a.txt"> I cannot handle this. 
+        //! Some URLs are like <a href="../../../a.txt"> I cannot handle this.
 	// again...probably good to recursively keep going..
 	// NEW
-        
+
         return GetNextURL(html,urlofthispage,result,pos+1);
 	// /NEW
       }
@@ -197,7 +169,7 @@ int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
         strcpy(result, urlofthispage);
         result[i] = 0;
         strncat(result, p1, (p2 - p1));
-        return (int)(p2 - html + 1);        
+        return (int)(p2 - html + 1);
       } else {
         //! the URL is a absolute path.
         len = strlen(urlofthispage);
@@ -228,46 +200,122 @@ int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
         return (int)(p2 - html + 1);
       }
     }
-  }    
+  }
   return -1;
 }
+char* load_file(char const* path)
+{
+    char* buffer = 0;
+    long length;
+    FILE * f = fopen (path, "rb"); //was "rb"
 
+    if (f)
+    {
+      fseek (f, 0, SEEK_END);
+      length = ftell (f);
+      fseek (f, 0, SEEK_SET);
+      buffer = (char*)malloc ((length+1)*sizeof(char));
+      if (buffer)
+      {
+        fread (buffer, sizeof(char), length, f);
+      }
+      fclose (f);
+    }
+    buffer[length] = '\0';
+    // for (int i = 0; i < length; i++) {
+    //     printf("buffer[%d] == %c\n", i, buffer[i]);
+    // }
+    //printf("buffer = %s\n", buffer);
+
+    return buffer;
+}
+void get_Page(char *url,char* argv[])  // function to fetch url from user and contact in urlBuffer and fetch page source code and add it to temp file
+{
+    char urlBuffer[urlLength + 300] = {0};
+    strcat(urlBuffer, "wget -O ./");
+    strcat(urlBuffer,argv[3]);
+    strcat(urlBuffer, "/temp.txt ");
+    strcat(urlBuffer, url);
+    system(urlBuffer);
+    strcat(argv[3],"/temp.txt");
+    char *html=load_file(argv[3]);
+    //printf("%s\n",argv[1] );
+    printf("Page fetched successfully");
+    char *result;
+    int ans=0;
+    char **links;
+    int len=100;
+    //int j=0;
+    int flag=0;
+    links=malloc(sizeof(char*)*len);
+    ans=GetNextURL(html, argv[1],result ,0);
+    links[0]=result;
+    printf("%s\n",links[0] );
+    for(int i=1;i<100;i++)
+    {
+      printf("%s\n",links[0] );
+      ans=GetNextURL(html, argv[1],result ,ans);
+      printf("%s\n",result );
+      for(int j=0;j<i;j++)
+      {
+        if(strcmp(result,links[j])==0)
+        {
+          flag=1;
+          break;
+        }
+      }
+      if(flag==0){
+        printf("HI\n");
+      }
+      //printf("%s1\n",result );
+      flag=0;
+      printf("Zero" );
+
+    }
+
+
+
+
+
+}
+void Check_Arguments(int argc,char* argv[])  // function to check whether all arguments are correct or not!!
+{
+    	if(Check_Argument(argc))
+        {
+            if(Check_Depth(argv))
+            {
+                if(Check_Url(argv))
+                {
+                    system("clear");
+                    printf("URL is corrent");
+                    if(Check_Dir(argv))
+                    {
+                        printf("All Arguments are correct\n");
+                    }
+                }
+            }
+        }
+}
+struct link{
+  char *url;
+  int depth;
+  int isUsed;
+  int key;
+  struct List* next;
+  struct List* prev;
+};
+struct Hash{
+  struct Link* first;
+  struct Link* last;
+  int count;
+};
+int hashFunction()
+{
+
+}
 
 int main(int argc,char* argv[])
 {
     Check_Arguments(argc,argv);
     get_Page(argv[1],argv);
-    struct stat st;
-stat("temp.txt",&st);
-int file_size=st.st_size;
-file_size++;
-    char *data;
-    data = (char *)malloc(file_size*sizeof(char));
-    FILE *fp;
-    int i=0;
-    char ch;
-    fp = fopen("temp.txt", "r+");
-    ch = getc(fp);
-    while (ch!=EOF)
-    {
-       data[i++] +=ch;
-       ch = getc(fp);
-       
-    }
-    char *links[100];
-    int j=0;
-     fclose(fp);
-     char *result;
-     result = (char *)malloc(file_size*sizeof(char));
-     int ans = GetNextURL(data,argv[1],result, 0); 
-    while(j<100){
-        links[j] = (char *)malloc(200*sizeof(char));
-            strcpy(links[j++],result);
-             ans = GetNextURL(data,argv[1],result, ans);
-    }
-    for(int j=0;j<100;j++){
-        printf("\n%s",links[j]);
-    }
- 
-    return 0;
 }
