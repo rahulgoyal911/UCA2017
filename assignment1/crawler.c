@@ -76,7 +76,7 @@ int Check_Dir(char* argv[])
 void removeWhiteSpace(char* html)
 {
   int i;
-  char *buffer = malloc(strlen(html)+1), *p=malloc (sizeof(char)+1);
+  char *buffer = (char *)malloc(strlen(html)+1), *p=(char *)malloc(sizeof(char)+1);
   memset(buffer,0,strlen(html)+1);
   for (i=0;html[i];i++)
   {
@@ -247,7 +247,7 @@ void get_Page(char *url,char* argv[])  // function to fetch url from user and co
     int len=100;
     //int j=0;
     int flag=0;
-    links=malloc(sizeof(char*)*len);
+    links=(char **)malloc(sizeof(char*)*len);
     ans=GetNextURL(html, argv[1],result ,0);
     links[0]=result;
     printf("%s\n",links[0] );
@@ -269,7 +269,7 @@ void get_Page(char *url,char* argv[])  // function to fetch url from user and co
       }
       //printf("%s1\n",result );
       flag=0;
-      printf("Zero" );
+     // printf("Zero" );
 
     }
 

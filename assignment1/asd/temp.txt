@@ -1046,17 +1046,17 @@ Students from around the country are getting attracted to Chitkara University be
 				<div class="newspanel bgf7">
 					<div class="cutimes">
 						<a href="https://www.chitkara.edu.in/cu-times/"><img src="https://www.chitkara.edu.in/wp-content/themes/chitkara/images/cu-times-logo.png" alt="cu-times-logo" title="cu-times-logo" width="140" height="41" /></a>
-					<span>8-03-2019</span>
+					<span>10-03-2019</span>
 					</div>
 					<ul class="newslist">
 						                                <li>
+	                                	<a href="https://www.chitkara.edu.in/news/chitkara-university-team-gully-gang-bag-first-prize-at-sih-2019/">Chitkara University Team ‘Gully Gang’ bag first prize at SIH-2019</a>
+	                                </li>
+                                	                                <li>
 	                                	<a href="https://www.chitkara.edu.in/news/chitkara-university-toastmasters-club-wins-beat-the-clock-team-enthusiastic-award/">Chitkara University Toastmaster&#8217;s Club wins &#8216;Beat the Clock&#8217;, &#8216;Team Enthusiastic&#8217; Award</a>
 	                                </li>
                                 	                                <li>
 	                                	<a href="https://www.chitkara.edu.in/news/woman-of-substance-dr-madhu-chitkara-honoured-for-breaking-the-glass-ceiling/">&#8216;Woman of Substance&#8217; Dr. Madhu Chitkara honoured for breaking the glass ceiling</a>
-	                                </li>
-                                	                                <li>
-	                                	<a href="https://www.chitkara.edu.in/news/smart-india-hackathon-2019-pm-narendra-modi-interacts-live-with-students-at-chitkara-university/">Smart India Hackathon 2019: PM Narendra Modi interacts live with students at Chitkara University</a>
 	                                </li>
                                 					</ul>	
 					<div class="in-the-press-btn-news">	
@@ -2443,9 +2443,9 @@ s.parentNode.insertBefore(b, s);})();
 <!--
 Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
 
-Object Caching 356/531 objects using disk
+Object Caching 351/539 objects using disk
 Page Caching using disk: enhanced 
 Minified using disk
 
-Served from: www.chitkara.edu.in @ 2019-03-08 06:41:45 by W3 Total Cache
+Served from: www.chitkara.edu.in @ 2019-03-10 02:46:08 by W3 Total Cache
 -->
