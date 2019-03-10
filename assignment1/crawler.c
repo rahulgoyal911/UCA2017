@@ -222,10 +222,6 @@ char* load_file(char const* path)
       fclose (f);
     }
     buffer[length] = '\0';
-    // for (int i = 0; i < length; i++) {
-    //     printf("buffer[%d] == %c\n", i, buffer[i]);
-    // }
-    //printf("buffer = %s\n", buffer);
 
     return buffer;
 }
@@ -239,24 +235,30 @@ void get_Page(char *url,char* argv[])  // function to fetch url from user and co
     system(urlBuffer);
     strcat(argv[3],"/temp.txt");
     char *html=load_file(argv[3]);
-    //printf("%s\n",argv[1] );
+
     printf("Page fetched successfully");
     char *result;
+   
     int ans=0;
     char **links;
+    links=(char **)malloc(sizeof(char *)*101);
+    for(int i=0;i<100;i++){
+      links[i] = (char *)malloc(sizeof(char)*200);
+    }
     int len=100;
-    //int j=0;
     int flag=0;
-    links=(char **)malloc(sizeof(char*)*len);
+     
     ans=GetNextURL(html, argv[1],result ,0);
-    links[0]=result;
-    printf("%s\n",links[0] );
-    for(int i=1;i<100;i++)
+    int l=0;
+    
+    strcpy(links[l++],result);
+
+    while(l<100)
     {
-      printf("%s\n",links[0] );
+
       ans=GetNextURL(html, argv[1],result ,ans);
-      printf("%s\n",result );
-      for(int j=0;j<i;j++)
+      
+      for(int j=0;j<l;j++)
       {
         if(strcmp(result,links[j])==0)
         {
@@ -265,15 +267,18 @@ void get_Page(char *url,char* argv[])  // function to fetch url from user and co
         }
       }
       if(flag==0){
-        printf("HI\n");
+       strcpy(links[l++],result);
       }
-      //printf("%s1\n",result );
-      flag=0;
-     // printf("Zero" );
-
+      else{
+       ans=GetNextURL(html, argv[1],result ,ans);
+       flag=0;
+      }
     }
 
-
+  for(int i=0;i<l;i++){
+    printf("\n%s",links[i]);
+  }
+  //now there are 100 unique links in array named 'links'
 
 
 
