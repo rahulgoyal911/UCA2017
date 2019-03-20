@@ -6,6 +6,31 @@
 #define urlLength 1000
 #define Base_Url "www.chitkara.edu.in"
 static char name='a';
+
+typedef struct LinkList  // structure for linked list
+{
+	 int Link_key;
+   int Link_flag;
+   char *Link_url;
+   struct LinkList *Link_next;
+   int Link_depth;
+}LinkList;
+
+struct Hashing  // structure for hashing
+{
+	struct LinkList *first;
+	struct LinkList *last;
+	int count;
+};
+
+struct Hashing hash[50];
+LinkList *Head=NULL;
+LinkList *last=NULL;
+
+// void putInLinked(int key,char *links){
+//  struct LinkList 
+// }
+
 int Check_Argument(int check)  // function to check wheater user has entered total 3 arguments or not!!
 {
     if(check==4)
@@ -48,7 +73,7 @@ int Check_Url(char* argv[])  // function to check wheater url is correct or not!
     }
 }
 
-int Check_Dir(char* argv[])
+int Check_Dir(char* argv[]) //function to check weather directory exists and we have permissions or not
 {
     struct stat statbuf;
     if( stat(argv[3],&statbuf) == -1)
@@ -73,7 +98,7 @@ int Check_Dir(char* argv[])
     return 1;
 }
 
-void removeWhiteSpace(char* html)
+void removeWhiteSpace(char* html) //removing white spaces from fetched page to extract links in it
 {
   int i;
   char *buffer = (char *)malloc(strlen(html)+1), *p=(char *)malloc(sizeof(char)+1);
@@ -90,7 +115,7 @@ void removeWhiteSpace(char* html)
   free(buffer); free(p);
 }
 
-int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
+int GetNextURL(char* html, char* urlofthispage, char* result, int pos) //to get next url present in fetched page will store it in result and return the index of last traversed point
 {
   char c;
   int len, i, j;
@@ -203,7 +228,7 @@ int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
   }
   return -1;
 }
-char* load_file(char const* path)
+char* load_file(char const* path) //to get data from downloaded file
 {
     char* buffer = 0;
     long length;
@@ -225,7 +250,8 @@ char* load_file(char const* path)
 
     return buffer;
 }
-void transferFile(){
+void transferFile() //transfer file to moved directory after fetching urls from it
+{
   system("mkdir asd/moved");
   char str[40] = "mv asd/temp.txt asd/moved/";
   str[strlen(str)] += name;
@@ -292,7 +318,6 @@ char** get_Page(char *url,char* argv[])  // function to fetch url from user and 
   //now there are 100 unique links in array named 'links'
   transferFile();
 return links;
-
 }
 
 void Check_Arguments(int argc,char* argv[])  // function to check whether all arguments are correct or not!!
@@ -313,12 +338,32 @@ void Check_Arguments(int argc,char* argv[])  // function to check whether all ar
             }
         }
 }
+
+int Find_Key(char *link)
+{
+	int i=0,key=0;
+	while(link[i]!='\0')
+	{
+	  key+=(int)link[i++];
+	}
+	while(key>100)
+	{
+	  key/=10;
+	}
+	return key;
+}
+
+
 int main(int argc,char* argv[])
 {
   char **links;
     Check_Arguments(argc,argv);
     links = get_Page(argv[1],argv);
-    for(int i=0;i<100;i++){
-    printf("\n%d - %s",i,links[i]);
+    for(int i=0;i<100;i++)
+    {
+        // printf("\n%d - %s",i,links[i]);
+        int key = Find_Key(links[i]);
+        printf("\n%d - %s - %d ",i,links[i] , key);
+        putInLinked(key,links[i]);
   }
 }
