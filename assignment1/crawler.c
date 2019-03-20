@@ -5,7 +5,7 @@
 #include<sys/stat.h>
 #define urlLength 1000
 #define Base_Url "www.chitkara.edu.in"
-
+static char name='a';
 int Check_Argument(int check)  // function to check wheater user has entered total 3 arguments or not!!
 {
     if(check==4)
@@ -29,6 +29,7 @@ int Check_Depth(char* argv[])  // function to check wheater depth entered in pos
     }
     return 1;
 }
+
 int Check_Url(char* argv[])  // function to check wheater url is correct or not!!
 {
     char v[]="wget --spider ";
@@ -71,7 +72,6 @@ int Check_Dir(char* argv[])
     }
     return 1;
 }
-
 
 void removeWhiteSpace(char* html)
 {
@@ -225,7 +225,18 @@ char* load_file(char const* path)
 
     return buffer;
 }
-void get_Page(char *url,char* argv[])  // function to fetch url from user and contact in urlBuffer and fetch page source code and add it to temp file
+void transferFile(){
+  system("mkdir asd/moved");
+  char str[40] = "mv asd/temp.txt asd/moved/";
+  str[strlen(str)] += name;
+  str[strlen(str)+1] += '\n';
+  // strcat(str,str(i));
+  strcat(str,".txt");
+  system(str);
+  system("mv temp.txt asd/moved/");
+  name++;
+}
+char** get_Page(char *url,char* argv[])  // function to fetch url from user and contact in urlBuffer and fetch page source code and add it to temp file
 {
     char urlBuffer[urlLength + 300] = {0};
     strcat(urlBuffer, "wget -O ./");
@@ -276,13 +287,14 @@ void get_Page(char *url,char* argv[])  // function to fetch url from user and co
     }
 
   for(int i=0;i<l;i++){
-    printf("\n%s",links[i]);
+    // printf("\n%s",links[i]);
   }
   //now there are 100 unique links in array named 'links'
-
-
+  transferFile();
+return links;
 
 }
+
 void Check_Arguments(int argc,char* argv[])  // function to check whether all arguments are correct or not!!
 {
     	if(Check_Argument(argc))
@@ -301,26 +313,12 @@ void Check_Arguments(int argc,char* argv[])  // function to check whether all ar
             }
         }
 }
-struct link{
-  char *url;
-  int depth;
-  int isUsed;
-  int key;
-  struct List* next;
-  struct List* prev;
-};
-struct Hash{
-  struct Link* first;
-  struct Link* last;
-  int count;
-};
-int hashFunction()
-{
-
-}
-
 int main(int argc,char* argv[])
 {
+  char **links;
     Check_Arguments(argc,argv);
-    get_Page(argv[1],argv);
+    links = get_Page(argv[1],argv);
+    for(int i=0;i<100;i++){
+    printf("\n%d - %s",i,links[i]);
+  }
 }
