@@ -5,32 +5,23 @@
 #include<sys/stat.h>
 #define urlLength 1000
 #define Base_Url "www.chitkara.edu.in"
-static char name='a';
-
-typedef struct LinkList  // structure for linked list
-{
-	 int Link_key;
-   int Link_flag;
-   char *Link_url;
-   struct LinkList *Link_next;
-   int Link_depth;
-}LinkList;
-
-struct Hashing  // structure for hashing
-{
-	struct LinkList *first;
-	struct LinkList *last;
-	int count;
-};
-
-struct Hashing hash[50];
-LinkList *Head=NULL;
-LinkList *last=NULL;
-
-// void putInLinked(int key,char *links){
-//  struct LinkList 
-// }
-
+struct LinkList {
+    char* url;
+    int depth;
+    struct LinkList *next;
+}*listHead;
+char* returnSubUrl(char *url) {
+    int i = 0;
+    char *subUrl = (char*)malloc(sizeof(char) * urlLength);
+    subUrl = url;
+    while(url[i] != '/') {
+        if(url[i] == '\0')
+            break;
+        i++;
+    }
+    subUrl[i] = '\0';
+    return subUrl;
+}
 int Check_Argument(int check)  // function to check wheater user has entered total 3 arguments or not!!
 {
     if(check==4)
@@ -54,7 +45,6 @@ int Check_Depth(char* argv[])  // function to check wheater depth entered in pos
     }
     return 1;
 }
-
 int Check_Url(char* argv[])  // function to check wheater url is correct or not!!
 {
     char v[]="wget --spider ";
@@ -73,7 +63,7 @@ int Check_Url(char* argv[])  // function to check wheater url is correct or not!
     }
 }
 
-int Check_Dir(char* argv[]) //function to check weather directory exists and we have permissions or not
+int Check_Dir(char* argv[])
 {
     struct stat statbuf;
     if( stat(argv[3],&statbuf) == -1)
@@ -98,10 +88,11 @@ int Check_Dir(char* argv[]) //function to check weather directory exists and we 
     return 1;
 }
 
-void removeWhiteSpace(char* html) //removing white spaces from fetched page to extract links in it
+
+void removeWhiteSpace(char* html)
 {
   int i;
-  char *buffer = (char *)malloc(strlen(html)+1), *p=(char *)malloc(sizeof(char)+1);
+  char *buffer = malloc(strlen(html)+1), *p=malloc (sizeof(char)+1);
   memset(buffer,0,strlen(html)+1);
   for (i=0;html[i];i++)
   {
@@ -115,7 +106,7 @@ void removeWhiteSpace(char* html) //removing white spaces from fetched page to e
   free(buffer); free(p);
 }
 
-int GetNextURL(char* html, char* urlofthispage, char* result, int pos) //to get next url present in fetched page will store it in result and return the index of last traversed point
+int GetNextURL(char* html, char* urlofthispage, char* result, int pos)
 {
   char c;
   int len, i, j;
@@ -228,7 +219,7 @@ int GetNextURL(char* html, char* urlofthispage, char* result, int pos) //to get 
   }
   return -1;
 }
-char* load_file(char const* path) //to get data from downloaded file
+char* load_file(char const* path)
 {
     char* buffer = 0;
     long length;
@@ -247,79 +238,113 @@ char* load_file(char const* path) //to get data from downloaded file
       fclose (f);
     }
     buffer[length] = '\0';
+    // for (int i = 0; i < length; i++) {
+    //     printf("buffer[%d] == %c\n", i, buffer[i]);
+    // }
+    //printf("buffer = %s\n", buffer);
 
     return buffer;
 }
-void transferFile() //transfer file to moved directory after fetching urls from it
-{
-  system("mkdir asd/moved");
-  char str[40] = "mv asd/temp.txt asd/moved/";
-  str[strlen(str)] += name;
-  str[strlen(str)+1] += '\n';
-  // strcat(str,str(i));
-  strcat(str,".txt");
-  system(str);
-  system("mv temp.txt asd/moved/");
-  name++;
+void putInList(char **links) {
+    struct LinkList *obj, *listHeadPtr;
+    listHead = (struct LinkList*)malloc(sizeof(struct LinkList));
+    listHeadPtr = listHead;
+    listHeadPtr->url = links[0];
+    listHeadPtr->next = 0;
+    for(int i = 2;i<101;i++) {
+
+        obj = (struct LinkList*)malloc(sizeof(struct LinkList));
+        //obj->url = (char*)malloc(sizeof(char) * 1000);
+        obj->url = links[i];
+        obj->next = 0;
+        listHeadPtr->next = obj;
+        listHeadPtr = listHeadPtr->next;
+    }
 }
-char** get_Page(char *url,char* argv[])  // function to fetch url from user and contact in urlBuffer and fetch page source code and add it to temp file
+int linkcount=0;
+void get_eachpage(char url[100]){
+  char fileName[25]="/link";
+  char count[5];
+
+  sprintf(count,"%d",linkcount);
+  //printf("%s\n", fileName);
+  //sscanf(linkcount,"%s",&count);
+  strcat(fileName,count);
+  strcat(fileName,".txt ");
+  char urlBuffer[urlLength + 300] = {0};
+  strcat(urlBuffer, "wget -O ./");
+  strcat(urlBuffer,"Links");
+  strcat(urlBuffer, fileName);
+  strcat(urlBuffer, url);
+  printf("%s\n",urlBuffer );
+  system(urlBuffer);
+  linkcount++;
+
+}
+void get_Page(char *url,char* argv[])  // function to fetch url from user and contact in urlBuffer and fetch page source code and add it to temp file
 {
-    char urlBuffer[urlLength + 300] = {0};
-    strcat(urlBuffer, "wget -O ./");
-    strcat(urlBuffer,argv[3]);
-    strcat(urlBuffer, "/temp.txt ");
-    strcat(urlBuffer, url);
-    system(urlBuffer);
-    strcat(argv[3],"/temp.txt");
-    char *html=load_file(argv[3]);
+  char urlBuffer[urlLength + 300] = {0};
+  strcat(urlBuffer, "wget -O ./");
+  strcat(urlBuffer,argv[3]);
+  strcat(urlBuffer, "/temp.txt ");
+  strcat(urlBuffer, url);
+  system(urlBuffer);
+  strcat(argv[3],"/temp.txt");
+  char *html=load_file(argv[3]);
 
-    printf("Page fetched successfully");
-    char *result;
-   
-    int ans=0;
-    char **links;
-    links=(char **)malloc(sizeof(char *)*101);
-    for(int i=0;i<100;i++){
-      links[i] = (char *)malloc(sizeof(char)*200);
-    }
-    int len=100;
-    int flag=0;
-     
-    ans=GetNextURL(html, argv[1],result ,0);
-    int l=0;
-    
-    strcpy(links[l++],result);
+  printf("Page fetched successfully");
+  char *result;
 
-    while(l<100)
-    {
+  int ans=0;
 
-      ans=GetNextURL(html, argv[1],result ,ans);
-      
-      for(int j=0;j<l;j++)
-      {
-        if(strcmp(result,links[j])==0)
-        {
-          flag=1;
-          break;
-        }
-      }
-      if(flag==0){
-       strcpy(links[l++],result);
-      }
-      else{
-       ans=GetNextURL(html, argv[1],result ,ans);
-       flag=0;
-      }
-    }
-
-  for(int i=0;i<l;i++){
-    // printf("\n%s",links[i]);
+  char **links;
+  links=(char **)malloc(sizeof(char *)*101);
+  for(int i=0;i<100;i++){
+    links[i] = (char *)malloc(sizeof(char)*200);
   }
-  //now there are 100 unique links in array named 'links'
-  transferFile();
-return links;
-}
+  int len=100;
+  int flag=0;
 
+  ans=GetNextURL(html, argv[1],result ,0);
+  int l=0;
+
+  strcpy(links[l++],result);
+
+  while(l<100)
+  {
+
+    ans=GetNextURL(html, argv[1],result ,ans);
+
+    for(int j=0;j<l;j++)
+    {
+      if(strcmp(result,links[j])==0)
+      {
+        flag=1;
+        break;
+      }
+    }
+    if(flag==0){
+     strcpy(links[l++],result);
+    }
+    else{
+     ans=GetNextURL(html, argv[1],result ,ans);
+     flag=0;
+    }
+  }
+
+for(int i=0;i<l;i++){
+  printf("\n%s",links[i]);
+
+  }
+  putInList(links);
+  while(listHead->next != 0) {
+      //printf("%s\n", listHead->url);
+      get_eachpage(listHead->url);
+      listHead = listHead->next;
+}
+//now there are 100 unique links in array named 'links'
+
+}
 void Check_Arguments(int argc,char* argv[])  // function to check whether all arguments are correct or not!!
 {
     	if(Check_Argument(argc))
@@ -338,32 +363,32 @@ void Check_Arguments(int argc,char* argv[])  // function to check whether all ar
             }
         }
 }
+char* convertDataInStr(char *fileName) {
 
-int Find_Key(char *link)
-{
-	int i=0,key=0;
-	while(link[i]!='\0')
-	{
-	  key+=(int)link[i++];
-	}
-	while(key>100)
-	{
-	  key/=10;
-	}
-	return key;
+    struct stat st;
+    stat(fileName, &st);
+    int fileSize = st.st_size, i = 0;
+    char *fileContent = (char*)malloc(sizeof(char) * fileSize), ch;
+    FILE *file = fopen(fileName, "r");
+    ch = getc(file);
+    while(ch != EOF) {
+        fileContent[i] = ch;
+        ch = getc(file);
+        i++;
+    }
+
+    fileContent[i] = '\0';
+//    fclose(file);
+    return fileContent;
 }
 
 
 int main(int argc,char* argv[])
 {
-  char **links;
     Check_Arguments(argc,argv);
-    links = get_Page(argv[1],argv);
-    for(int i=0;i<100;i++)
-    {
-        // printf("\n%d - %s",i,links[i]);
-        int key = Find_Key(links[i]);
-        printf("\n%d - %s - %d ",i,links[i] , key);
-        putInLinked(key,links[i]);
-  }
+    get_Page(argv[1],argv);
+    //char *fileContent = convertDataInStr("htmlIntxt.txt");
+    int pos = 0;
+    //printf("asd\n");
+
 }
