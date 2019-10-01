@@ -7,7 +7,7 @@ int sum(int n){
     return a;
     //int a;
     a = n%10;
-    a+=sum(n/10);
+    a=a+sum(n/10);
 }
 int main()
 {
